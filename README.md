@@ -1,6 +1,18 @@
-# KIVI: A Tuning-Free Asymmetric 2bit Quantization for KV Cache
+# KIVI
 
-Implementation of [ICML24] [KIVI: A Tuning-Free Asymmetric 2bit Quantization for KV Cache](https://arxiv.org/abs/2402.02750)
+## 环境搭建
+```
+先删除了pyproject.toml中对于flash_attn的依赖
+uv pip install --upgrade pip
+uv pip install -e .
+手动下载对应的flash_attn，分为两种，cxxABI不同
+uv pip install ../../tmp/flash_attn-2.8.3+cu12torch2.4cxx11abiFALSE-cp310-cp310-linux_x86_64.whl
+
+接着去编译自定义CUDA
+cd quant
+uv pip install setuptools, wheels
+uv pip install -e . --no-build-isolation # 关闭环境隔离
+```
 
 ## Updates
 - [2025.09.25]: 🔥🔥🔥 We released a toolkit that tests the impact of numerical precision and enables deterministic LLM inference. This helps eliminate the training–inference mismatch in reinforcement learning. Please 🌟 it if you find this work is interesting and useful for your research! <https://github.com/nanomaoli/llm_reproducibility>
@@ -14,7 +26,7 @@ Implementation of [ICML24] [KIVI: A Tuning-Free Asymmetric 2bit Quantization for
 
 - [2024.04.04]: 🔥🔥We add a new 5-digit [passkey example](./long_context_example.py) with 12k context length to show the performance of 2bit KIVI under the long context senario.
 
-- [2024.04.04]: (Beta) We add the flash-attention support for KIVI during the prefill phase. 
+- [2024.04.04]: (Beta) We add the flash-attention support for KIVI during the prefill phase.
 
 - [2024.04.03]: We add a new [5-shot GSM8K example.py](./example.py) to show the performance of 2/4 bit KIVI with 32 full precision tokens.
 
@@ -85,9 +97,9 @@ model = LlamaForCausalLM_KIVI.from_pretrained(
 )
 
 tokenizer = AutoTokenizer.from_pretrained(
-    'meta-llama/Llama-2-7b-hf', 
-    use_fast=False, 
-    trust_remote_code=True, 
+    'meta-llama/Llama-2-7b-hf',
+    use_fast=False,
+    trust_remote_code=True,
     tokenizer_type='llama')
 
 # Inference

@@ -14,6 +14,15 @@ uv pip install setuptools, wheels
 uv pip install -e . --no-build-isolation # 关闭环境隔离
 ```
 
+## 调用
+```
+python ./example.py
+关注models/llama_kivi.py是如何来处理prefill阶段和decode阶段对于KV缓存的管理和量化的
+
+python ./quant/test.py
+关注quant/new_pack.py是如何来用python模拟量化和用triton实现量化的
+```
+
 ## Updates
 - [2025.09.25]: 🔥🔥🔥 We released a toolkit that tests the impact of numerical precision and enables deterministic LLM inference. This helps eliminate the training–inference mismatch in reinforcement learning. Please 🌟 it if you find this work is interesting and useful for your research! <https://github.com/nanomaoli/llm_reproducibility>
 - [2025.01.18]: We add KIVI implementation with GQA and compatible with transformers 4.43. Now it supports the LLama3 family. Please reinstall KIVI.
